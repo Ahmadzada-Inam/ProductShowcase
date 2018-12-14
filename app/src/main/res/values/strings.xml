@@ -2,4 +2,5 @@
     <string name="app_name">ProductShowcase</string>
     <string name="categories">Categories</string>
     <string name="category_image">category image</string>
+    <string name="products">Products</string>
 </resources>
