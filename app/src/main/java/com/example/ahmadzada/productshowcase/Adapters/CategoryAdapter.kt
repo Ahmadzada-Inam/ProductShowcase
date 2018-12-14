@@ -10,11 +10,11 @@ import android.widget.TextView
 import com.example.ahmadzada.productshowcase.Models.Category
 import com.example.ahmadzada.productshowcase.R
 
-class CategoryAdapter(val context: Context, val categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
+class CategoryAdapter(val context: Context, val categories: List<Category>, val itemClick: (Category) -> Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val view = LayoutInflater.from(this.context).inflate(R.layout.category_list_item, parent, false)
-        return CategoryHolder(view)
+        return CategoryHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +25,7 @@ class CategoryAdapter(val context: Context, val categories: List<Category>) : Re
         holder.bindCategory(this.categories[position], this.context)
     }
 
-    inner class CategoryHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class CategoryHolder(itemView: View?, val itemClick: (Category) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val categoryName = itemView?.findViewById<TextView>(R.id.categoryName)
         val categoryImage = itemView?.findViewById<ImageView>(R.id.categoryImage)
 
@@ -33,6 +33,7 @@ class CategoryAdapter(val context: Context, val categories: List<Category>) : Re
             val resourceId = context.resources.getIdentifier(category.image, "drawable", context.packageName)
             this.categoryImage?.setImageResource(resourceId)
             this.categoryName?.text = category.title
+            itemView?.setOnClickListener { itemClick(category) }
         }
     }
 }

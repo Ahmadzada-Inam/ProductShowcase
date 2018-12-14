@@ -31,7 +31,7 @@ class ProductAdapter(val context: Context, val products: List<Product>) : Recycl
         val productImage = itemView?.findViewById<ImageView>(R.id.product_image)
 
         fun bindProduct(product: Product, context: Context) {
-            val resourceId = context.resources.getIdentifier(product.title, "drawable", context.packageName)
+            val resourceId = context.resources.getIdentifier(product.image, "drawable", context.packageName)
             this.productImage?.setImageResource(resourceId)
             this.productTitle?.text = product.title
             this.productPrice?.text = product.price
